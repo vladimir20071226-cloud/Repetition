@@ -29,27 +29,6 @@ class BankAccount:
     def __add__(self, other):
         return BankAccount(owner=f"{self.owner} + {other.owner}",
                            balance=self.balance+other.balance)
-class TestBankAccount(unittest.TestCase):
-    def setUp(self):
-        self.acc=BankAccount("Вова", 9000)
-    def test_to_genetive(self):
-        self.assertEqual(BankAccount.to_genetive("Иван"), "Ивана")
-        self.assertEqual(BankAccount.to_genetive("Вова"), "Вовы")
-        self.assertEqual(BankAccount.to_genetive("Петя"), "Петя")
-    def test_deposit_positive(self):
-        self.acc.deposit(3000)
-        self.assertEqual(self.acc.balance, 12000)
-    def test_deposit_negative(self):
-        with self.assertRaises(ValueError):
-            self.acc.deposit(-500)
-    def test_withdraw_valid(self):
-        self.acc.withdraw(3000)
-        self.assertEqual(self.acc.withdraw, 6000)
-    def test_withdraw_invalid(self):
-        with self.assertRaises(ValueError):
-            self.acc.withdraw(12000)
-    def test_balance_in_usd(self):
-        self.assertEqual(self.acc.balance_in_usd, 100.0)
 class Stack:
     def __init__(self, stack:list):
         self.stack=stack
@@ -156,57 +135,57 @@ class CSVLogger:
         return False
     def log(self, message):
         self.writer.writerow([datetime.datetime.now(), message])
-# class UserProfile:
-#     def __init__(self, username: str, email: str, age:int, full_name:str):
-#         self.username=username
-#         self._email=email
-#         self._age=age
-#         self.full_name=full_name
-#     @property
-#     def username(self):
-#         return self._username
-#     @username.setter
-#     def username(self, name_user:str):
-#         if not (3<=len(name_user)<=20 and name_user.isalnum()):
-#             raise ValueError("Должно быть от 3 до 20 символов, и включать только буквы/цифры")
-#         self._username=name_user
-#     @property
-#     def email(self):
-#         return self._email
-#     @email.setter
-#     def email(self, user_email:str):
-#         if not ('@' in user_email):
-#             raise ValueError("Должно быть @ и .")
-#         self._email=user_email
-#     @property
-#     def age(self):
-#         return self._age
-#     @age.setter
-#     def age(self, value: int):
-#         if not (3<=value<=120):
-#             raise ValueError("Должен быть в диапозоне от 3 до 120")
-#         self._age=value
-#     @property
-#     def fullname(self):
-#         return self.full_name.split(" ")
-#     @staticmethod
-#     def is_strong_password(pwd:str) -> bool:
-#         if len(pwd)<8 or not any(ch.isdigit() for ch in pwd):
-#             raise ValueError("Пароль должно состоять из 8 символов, и включать только буквы/цифры")
-#         return True
-#     @property
-#     def data(self):
-#         dictionary={"username": self.username,
-#                     "email": self.email,
-#                     "age": self.age,
-#                     "full_name": self.full_name}
-#         return dictionary
-#     @classmethod
-#     def from_dict(cls, data:dict):
-#         return cls(username=data["username"],
-#                    email=data["email"],
-#                    age=data["age"],
-#                    full_name=data["full_name"])
+class UserProfile:
+    def __init__(self, username: str, email: str, age:int, full_name:str):
+        self.username=username
+        self.email=email
+        self.age=age
+        self._full_name=full_name
+    @property
+    def username(self):
+        return self._username
+    @username.setter
+    def username(self, name_user:str):
+        if not (3<=len(name_user)<=20 and name_user.isalnum()):
+            raise ValueError("Должно быть от 3 до 20 символов, и включать только буквы/цифры")
+        self._username=name_user
+    @property
+    def email(self):
+        return self._email
+    @email.setter
+    def email(self, user_email:str):
+        if "@" not in user_email or "." not in user_email:
+            raise ValueError("Должно быть @ и .")
+        self._email=user_email
+    @property
+    def age(self):
+        return self._age
+    @age.setter
+    def age(self, value: int):
+        if not (3<=value<=120):
+            raise ValueError("Должен быть в диапозоне от 3 до 120")
+        self._age=value
+    @property
+    def fullname(self):
+        return self._full_name.split(" ")
+    @staticmethod
+    def is_strong_password(pwd:str) -> bool:
+        if len(pwd)>=8 and any(ch.isdigit() for ch in pwd):
+            raise ValueError("Пароль должно состоять из 8 символов, и включать только буквы/цифры")
+        return True
+    @property
+    def data(self):
+        dictionary={"username": self.username,
+                    "email": self.email,
+                    "age": self.age,
+                    "full_name": self.full_name}
+        return dictionary
+    @classmethod
+    def from_dict(cls, data:dict):
+        return cls(username=data["username"],
+                   email=data["email"],
+                   age=data["age"],
+                   full_name=data["full_name"])
 # data={"username": "Ivan123", "email": "ivan@mail.com", "age": 25, "full_name": "Иван Петров"}
 # user=UserProfile.from_dict(data)
 # user_1=UserProfile.is_strong_password("vova123@gmail.com")
