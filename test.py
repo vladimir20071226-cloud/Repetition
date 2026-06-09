@@ -40,6 +40,16 @@ def check_past_simple(text: str)->bool:
 """)
 def check_future_simple(text: str)->bool:
     return "will" in text.lower() or "shall" in text.lower()
+@grammar_doc("""
+    -Present Simple:Факты о человеке; 
+    -Примеры: 
+    -He studies English;
+    -I buy cars. We don't eat burgers
+""")
+def check_present_simple(text: str)->bool:
+    words=text.lower().split()
+    return any(word.endswith("s") for word in words) or \
+        any(word in words for word in ["does", "do", "don't", "doesn't"])
 def run_checks(text: str):
     results={}
     checks=[check_present_perfect, check_present_continuous, check_past_simple, check_future_simple]
@@ -49,11 +59,16 @@ def run_checks(text: str):
 with open('text/essay.txt', 'r', encoding='utf-8') as r:
     essay_text=r.read()
 with open('words.json', 'r', encoding='utf-8') as n:
-    words=json.load(n)
+    vocabularies=json.load(n)
 grammar_results=run_checks(essay_text)
 word_results={}
-for word in words:
-    word_results[word]=word.lower() in essay_text.lower()
+count_found=0
+for vocab_name, word_list in vocabularies.items():
+    count_found=sum(1 for w in word_list if w.lower() in essay_text.lower())
+    word_results[vocab_name]={"found":count_found, "required": 2, "pass": count_found>=2}
+    if count_found<2:
+        overall_pass=False
+word_results["overall_pass"] = overall_pass
 results={**grammar_results, **word_results}
 with open('print.json', 'w', encoding='utf-8') as out:
     json.dump(results, out, ensure_ascii=False, indent=3)

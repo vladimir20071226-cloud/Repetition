@@ -1,1 +1,23 @@
-["Python", "код", "файл", "машина"]
+{
+  "phrasal_verbs": [
+    "calm down", "give up", "find out", "turn on", "turn off",
+    "switch on", "switch off", "get on", "look for", "look forward to",
+    "look after", "end up", "put on", "take off", "try on", "hurry up",
+    "check in", "check out", "fill in", "call back", "go out",
+    "break up", "run out of", "bring up", "grow up"
+  ],
+  "Vocabulary List 1": [
+    "awful", "perfect", "wait for", "invite", "though",
+    "be madly in love", "be late", "be in a hurry", "suddenly", "dark",
+    "run across the road", "cross", "shout at", "hit", "order",
+    "anniversary", "exact", "panic", "knock at", "injury",
+    "give somebody a lift", "survive", "forgive"
+  ],
+  "Vocabulary List 2": [
+    "be a bit overweight", "lose weight", "doctor appointment", "heart disease",
+    "improve", "hardly ever", "advice", "even", "be determined", "succeed",
+    "complain", "smooth", "be hired", "stand out", "reply", "adult",
+    "height", "self-esteem", "fit in", "give it a try", "chance",
+    "introduce", "join", "huge", "advantage"
+  ]
+}

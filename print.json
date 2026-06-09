@@ -1,10 +1,22 @@
 {
-   "check_present_perfect": false,
-   "check_present_continuous": false,
-   "check_past_simple": false,
-   "check_future_simple": false,
-   "Python": false,
-   "код": true,
-   "файл": true,
-   "машина": false
+   "check_present_perfect": true,
+   "check_present_continuous": true,
+   "check_past_simple": true,
+   "check_future_simple": true,
+   "phrasal_verbs": {
+      "found": 4,
+      "required": 2,
+      "pass": true
+   },
+   "Vocabulary List 1": {
+      "found": 2,
+      "required": 2,
+      "pass": true
+   },
+   "Vocabulary List 2": {
+      "found": 1,
+      "required": 2,
+      "pass": false
+   },
+   "overall_pass": false
 }
